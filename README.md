@@ -1,16 +1,3 @@
-# saegimkkeori
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# 새김꺼리
+새김꺼리는 순 우리말로 새기어 둘 만한 일을 뜻합니다.
+오늘 하루 있었던 일 중 간직하고 싶은 일이 있다면 새김꺼리에 남겨보는 건 어떠신가요?
