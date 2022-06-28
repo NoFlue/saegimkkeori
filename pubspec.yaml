@@ -87,9 +87,6 @@ flutter:
     - family: EF_Diary
       fonts:
         - asset: assets/fonts/EF_Diary/EF_Diary.ttf
-    - family: tway_air
-      fonts:
-        - asset: assets/fonts/tway_air/tway_air.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
