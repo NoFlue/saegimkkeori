@@ -11,7 +11,7 @@ class MemoryListPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Palette.background,
       body: Column(
-        children: [
+        children: const [
           TitleContainer(),
           MemoryListView(),
         ],
