@@ -41,6 +41,7 @@ dependencies:
   hive_flutter: ^1.1.0
   equatable: ^2.0.3
   uuid: ^3.0.6
+  image_picker: ^0.8.5+3
 
 dev_dependencies:
   flutter_test:
@@ -86,6 +87,9 @@ flutter:
     - family: EF_Diary
       fonts:
         - asset: assets/fonts/EF_Diary/EF_Diary.ttf
+    - family: tway_air
+      fonts:
+        - asset: assets/fonts/tway_air/tway_air.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
