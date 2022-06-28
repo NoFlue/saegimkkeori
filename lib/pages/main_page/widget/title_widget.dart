@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:saegimkkeori/pages/writing_page/memory_writing_page.dart';
 import 'package:saegimkkeori/utils/palette.dart';
 
 class TitleContainer extends StatelessWidget {
@@ -42,7 +43,8 @@ class TitleContainer extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => MemoryWritingPage())),
                   child: Icon(
                     Icons.add,
                     color: Palette.primary,

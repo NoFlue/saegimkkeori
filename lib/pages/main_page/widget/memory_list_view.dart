@@ -17,7 +17,7 @@ class MemoryListView extends StatelessWidget {
         itemCount: memoryList.length,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
-            padding: EdgeInsets.all(8),
+            padding: EdgeInsets.all(16),
             child: MemoryCardView(index: index),
           );
         },
