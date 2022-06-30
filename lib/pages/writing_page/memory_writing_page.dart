@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:provider/provider.dart';
+import 'package:saegimkkeori/pages/writing_page/widget/image_picker.dart';
 import 'package:saegimkkeori/providers/memory_image_picker.dart';
 import 'package:saegimkkeori/utils/palette.dart';
 
@@ -50,11 +51,11 @@ class _MemoryWritingPageState extends State<MemoryWritingPage> {
             ),
           ],
         ),
-        body: Padding(
-          padding: EdgeInsets.only(left: 16, right: 16),
-          child: Column(
-            children: [
-              TextField(
+        body: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: 16, right: 16),
+              child: TextField(
                 controller: _titleController,
                 decoration: InputDecoration(
                   border: InputBorder.none,
@@ -64,15 +65,18 @@ class _MemoryWritingPageState extends State<MemoryWritingPage> {
                 style:
                     TextStyle(color: Palette.primary, fontFamily: 'EF_Diary'),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 14, right: 14),
-                child: Divider(
-                  thickness: .3,
-                  color: Palette.primary,
-                  height: 0,
-                ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 16, right: 16),
+              child: Divider(
+                thickness: .3,
+                color: Palette.primary,
+                height: 0,
               ),
-              Expanded(
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.only(left: 16, right: 16),
                 child: TextField(
                   controller: _contentController,
                   keyboardType: TextInputType.multiline,
@@ -86,8 +90,9 @@ class _MemoryWritingPageState extends State<MemoryWritingPage> {
                       TextStyle(color: Palette.primary, fontFamily: 'EF_Diary'),
                 ),
               ),
-            ],
-          ),
+            ),
+            ImageListView(),
+          ],
         ),
       ),
     );

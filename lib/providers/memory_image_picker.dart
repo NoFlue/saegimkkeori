@@ -30,4 +30,13 @@ class MemoryImagePickerState extends Equatable {
 
 class MemoryImagePicker extends StateNotifier<MemoryImagePickerState> {
   MemoryImagePicker() : super(MemoryImagePickerState.initial());
+
+  void addImage(List<XFile> images) => state = state.copyWith(images: images);
+
+  void removeImage(int index) {
+    final images =
+        state.images.where((image) => image != state.images[index]).toList();
+
+    state = state.copyWith(images: images);
+  }
 }
