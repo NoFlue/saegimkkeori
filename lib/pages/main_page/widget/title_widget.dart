@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:saegimkkeori/pages/search_page/memory_search_page.dart';
 import 'package:saegimkkeori/pages/writing_page/memory_writing_page.dart';
 import 'package:saegimkkeori/utils/palette.dart';
 
@@ -44,7 +45,10 @@ class TitleContainer extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => MemoryWritingPage())),
+                    MaterialPageRoute(
+                      builder: (_) => MemoryWritingPage(),
+                    ),
+                  ),
                   child: Icon(
                     Icons.add,
                     color: Palette.primary,
@@ -54,7 +58,11 @@ class TitleContainer extends StatelessWidget {
                   width: 10,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => MemorySearchPage(),
+                    ),
+                  ),
                   child: Icon(
                     Icons.search,
                     color: Palette.primary,

@@ -1,8 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:state_notifier/state_notifier.dart';
-
 import 'package:saegimkkeori/model/memory.dart';
 import 'package:saegimkkeori/providers/memory_search.dart';
 
@@ -39,7 +37,8 @@ class MemorySearchList extends StateNotifier<MemorySearchListState>
 
   @override
   void update(Locator watch) {
-    String str = watch<MemorySearchState>().searchTerm.toLowerCase();
+    final searchTerm = watch<MemorySearchState>().searchTerm;
+    String str = searchTerm.toLowerCase();
 
     List<Memory>? memories;
 
@@ -52,7 +51,7 @@ class MemorySearchList extends StateNotifier<MemorySearchListState>
       }).toList();
     }
 
-    state.copyWith(memories: memories!);
+    state = state.copyWith(memories: memories ?? []);
 
     super.update(watch);
   }

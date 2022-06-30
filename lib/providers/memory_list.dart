@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:state_notifier/state_notifier.dart';
@@ -39,7 +38,7 @@ class MemoryList extends StateNotifier<MemoryListState> {
   void createMemory(Memory memory) {
     final memories = [...state.memories, memory];
 
-    state.copyWith(memories: memories);
+    state = state.copyWith(memories: memories);
     memoryBox!.put(memory.id, memory);
   }
 
@@ -51,12 +50,12 @@ class MemoryList extends StateNotifier<MemoryListState> {
       return m;
     }).toList();
 
-    state.copyWith(memories: memories);
+    state = state.copyWith(memories: memories);
   }
 
   void deleteMemory(Memory memory) {
     final memories = state.memories.where((m) => memory.id != m.id).toList();
 
-    state.copyWith(memories: memories);
+    state = state.copyWith(memories: memories);
   }
 }
