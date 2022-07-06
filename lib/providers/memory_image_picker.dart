@@ -1,5 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:typed_data';
+
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:state_notifier/state_notifier.dart';
 
@@ -31,12 +34,21 @@ class MemoryImagePickerState extends Equatable {
 class MemoryImagePicker extends StateNotifier<MemoryImagePickerState> {
   MemoryImagePicker() : super(MemoryImagePickerState.initial());
 
-  void addImage(List<XFile> images) => state = state.copyWith(images: images);
+  void addImage(List<XFile>? images) {
+    state = state.copyWith(images: images);
+    print('${state.images.length}');
+  }
 
   void removeImage(int index) {
     final images =
         state.images.where((image) => image != state.images[index]).toList();
 
     state = state.copyWith(images: images);
+  }
+
+  Future<Image> getImage(int index) async {
+    final Uint8List bytes = await state.images[index].readAsBytes();
+
+    return Image.memory(bytes);
   }
 }
