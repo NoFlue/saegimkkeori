@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:saegimkkeori/pages/main_page/widget/memory_card_view.dart';
+import 'package:saegimkkeori/pages/search_page/widget/memory_card_search_view.dart';
 import 'package:saegimkkeori/providers/memory_search_list.dart';
 import 'package:saegimkkeori/utils/palette.dart';
 
@@ -19,7 +19,7 @@ class MemorySearchListView extends StatelessWidget {
       itemBuilder: (listContext, index) {
         return Padding(
           padding: EdgeInsets.only(top: 8, left: 16, right: 16),
-          child: MemoryCardView(index: index),
+          child: MemoryCardSearchView(index: index),
         );
       },
     );

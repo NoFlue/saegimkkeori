@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
+import 'package:saegimkkeori/providers/memory_list.dart';
 import 'package:state_notifier/state_notifier.dart';
 import 'package:saegimkkeori/model/memory.dart';
 import 'package:saegimkkeori/providers/memory_search.dart';
@@ -40,18 +41,15 @@ class MemorySearchList extends StateNotifier<MemorySearchListState>
     final searchTerm = watch<MemorySearchState>().searchTerm;
     String str = searchTerm.toLowerCase();
 
-    List<Memory>? memories;
+    if (str.isNotEmpty || str == '') {
+      List<Memory> memories = watch<MemoryListState>()
+          .memories
+          .where((m) => (m.title.toLowerCase().contains(str) ||
+              m.contents.toLowerCase().contains(str)))
+          .toList();
 
-    if (str.isNotEmpty) {
-      memories = state.memories.where((memory) {
-        if (memory.contents.contains(str) || memory.title.contains(str)) {
-          return true;
-        }
-        return false;
-      }).toList();
+      state = state.copyWith(memories: memories);
     }
-
-    state = state.copyWith(memories: memories ?? []);
 
     super.update(watch);
   }
