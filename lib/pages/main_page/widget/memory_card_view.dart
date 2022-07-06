@@ -19,7 +19,10 @@ class MemoryCardView extends StatelessWidget {
     return Container(
       height: 75,
       width: MediaQuery.of(context).size.width,
-      color: Palette.background,
+      decoration: BoxDecoration(
+        color: Palette.background,
+        border: Border.all(),
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

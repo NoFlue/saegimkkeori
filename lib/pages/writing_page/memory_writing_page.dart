@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:saegimkkeori/pages/writing_page/widget/image_picker.dart';
+import 'package:saegimkkeori/model/memory.dart';
 import 'package:saegimkkeori/providers/memory_image_picker.dart';
+import 'package:saegimkkeori/providers/memory_list.dart';
 import 'package:saegimkkeori/utils/palette.dart';
 
 class MemoryWritingPage extends StatefulWidget {
-  const MemoryWritingPage({Key? key}) : super(key: key);
+  final Memory? memory;
+
+  const MemoryWritingPage({Key? key, this.memory}) : super(key: key);
 
   @override
   State<MemoryWritingPage> createState() => _MemoryWritingPageState();
@@ -15,6 +19,14 @@ class MemoryWritingPage extends StatefulWidget {
 class _MemoryWritingPageState extends State<MemoryWritingPage> {
   final _titleController = TextEditingController();
   final _contentController = TextEditingController();
+
+  @override
+  void initState() {
+    _titleController.text = widget.memory == null ? '' : widget.memory!.title;
+    _contentController.text =
+        widget.memory == null ? '' : widget.memory!.contents;
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -39,7 +51,9 @@ class _MemoryWritingPageState extends State<MemoryWritingPage> {
           iconTheme: IconThemeData(color: Palette.primary),
           actions: [
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                addOrUpdateMemory();
+              },
               child: Text(
                 '작성',
                 style: TextStyle(
@@ -91,10 +105,27 @@ class _MemoryWritingPageState extends State<MemoryWritingPage> {
                 ),
               ),
             ),
-            ImageListView(),
           ],
         ),
       ),
     );
+  }
+
+  void addOrUpdateMemory() {
+    if (widget.memory == null) {
+      final DateTime now = DateTime.now();
+      final DateFormat format = DateFormat('yyyy.MM.dd');
+      final memory = Memory(
+        title: _titleController.text,
+        contents: _contentController.text,
+        date: format.format(now),
+      );
+
+      context.read<MemoryList>().createMemory(memory);
+    } else {
+      context.read<MemoryList>().updateMemory(widget.memory!);
+    }
+
+    Navigator.pop(context);
   }
 }
