@@ -123,9 +123,15 @@ class _MemoryWritingPageState extends State<MemoryWritingPage> {
 
       context.read<MemoryList>().createMemory(memory);
     } else {
-      context.read<MemoryList>().updateMemory(widget.memory!);
+      final memory = Memory(
+        id: widget.memory!.id,
+        title: _titleController.text,
+        contents: _contentController.text,
+        date: widget.memory!.date,
+      );
+      context.read<MemoryList>().updateMemory(memory);
     }
 
-    Navigator.pop(context);
+    Navigator.popUntil(context, (route) => route.isFirst);
   }
 }
