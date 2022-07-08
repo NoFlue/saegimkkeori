@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:saegimkkeori/utils/palette.dart';
 
 import '../../../providers/memory_search_list.dart';
+import '../../view_page/memory_view_page.dart';
 
 class MemoryCardSearchView extends StatelessWidget {
   final int index;
@@ -16,64 +17,81 @@ class MemoryCardSearchView extends StatelessWidget {
     List<String>? image =
         context.read<MemorySearchListState>().memories[index].images;
 
-    return Container(
-      height: 75,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        color: Palette.background,
-        border: Border.all(),
+    return GestureDetector(
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => Provider.value(
+            value: context.read<MemorySearchListState>().memories[index],
+            child: MemoryViewPage(),
+          ),
+        ),
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (image.isNotEmpty)
-            Padding(
-              padding: EdgeInsets.only(right: 8),
-              child: Container(
-                height: 75,
-                width: 75,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: Image.memory(base64Decode(image[0])).image),
+      child: Container(
+        height: 75,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          color: Palette.background,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(.1),
+              spreadRadius: 1,
+              blurRadius: 1,
+              offset: Offset(2, 2),
+            ),
+          ],
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (image.isNotEmpty)
+              Padding(
+                padding: EdgeInsets.only(right: 8),
+                child: Container(
+                  height: 75,
+                  width: 75,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: Image.memory(base64Decode(image[0])).image),
+                  ),
                 ),
               ),
-            ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(bottom: 2),
-                  child: Text(
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 2),
+                    child: Text(
+                      context
+                          .watch<MemorySearchListState>()
+                          .memories[index]
+                          .title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'EF_Diary',
+                      ),
+                    ),
+                  ),
+                  Text(
                     context
                         .watch<MemorySearchListState>()
                         .memories[index]
-                        .title,
-                    maxLines: 1,
+                        .contents,
+                    maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Palette.primary,
                       fontFamily: 'EF_Diary',
+                      fontSize: 12,
                     ),
                   ),
-                ),
-                Text(
-                  context
-                      .watch<MemorySearchListState>()
-                      .memories[index]
-                      .contents,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: Palette.primary,
-                    fontFamily: 'EF_Diary',
-                    fontSize: 12,
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
